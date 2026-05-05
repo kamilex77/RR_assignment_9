@@ -2,29 +2,24 @@
 title: "Breaking Bad Viewership Analysis"
 author: "Kamil Laskowski"
 date: "`r Sys.Date()`"
-output: html_document
+output:
+  html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+## Description
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+*Breaking Bad* is an American television drama series created by Vince Gilligan for the cable network AMC. The series follows *Walter White* (Bryan Cranston), a 50-year-old high school chemistry teacher in Albuquerque, New Mexico. After White is diagnosed with terminal lung cancer, he uses his chemistry expertise to cook crystal meth, assisted by his former student *Jesse Pinkman* (Aaron Paul), to secure his family's (played by Anna Gunn and RJ Mitte) inheritance before he dies.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+## Image
 
-```{r cars}
-summary(cars)
-```
+![Breaking Bad](Breaking_Bad_logo.png)
 
-## Including Plots
 
-You can also embed plots, for example:
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
