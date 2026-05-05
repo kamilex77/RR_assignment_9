@@ -19,7 +19,22 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ![Breaking Bad](Breaking_Bad_logo.png)
 
+## Summary statistics
 
+```{r}
+#AI assisted viewers data extraction from https://en.wikipedia.org/wiki/List_of_Suits_episodes
+viewers <- c(
+  1.41, 1.49, 1.08, 1.09, 0.97, 1.07, 1.50, 1.66, 1.60, 1.13, 1.29, 1.21, 1.41, 1.20, 1.04, 1.27, 1.19, 1.29, 1.19, 1.50, 1.95, 1.55, 1.33, 1.46, 1.61, 1.64, 1.52, 1.78, 1.61, 1.20, 1.32, 1.19, 1.56, 2.58, 1.97, 1.71, 1.83, 1.75, 1.67, 1.91, 1.98, 1.89, 1.80, 1.55, 1.73, 1.90, 2.93, 2.29, 2.20, 2.29, 2.48, 2.81, 2.98, 2.78, 5.92, 4.77, 4.85, 4.41, 5.11, 6.37, 6.58, 10.28
+)
 
+mean(viewers)
+median(viewers)
+min(viewers)
+max(viewers)
+sd(viewers)
+```
 
-
+The average viewership across all episodes is approximately 2.24 million viewers. 
+The minimum average episode viewership was 0.97 million (Season 1, Episode 5), while the maximum 
+reached 10.28 million (Season 5B, Episode 8). The data shows a clear upward trend, indicating 
+that the show gained significant popularity over time.
