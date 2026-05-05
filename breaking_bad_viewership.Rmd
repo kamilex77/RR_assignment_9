@@ -57,3 +57,25 @@ plot(changes, type="l",
      main="Episode-to-Episode Changes in Viewership")
 ```
 
+## Description of the observed changes on ratings
+
+```{r}
+#AI assisted rating data extraction from https://www.imdb.com/title/tt0903747/ratings/
+ratings <- c(
+  9.0, 8.6, 8.7, 8.2, 8.2, 9.3, 8.8, 8.6, 9.3, 8.3, 8.2, 8.2, 8.8, 8.6, 9.2, 9.2, 8.4, 8.9, 9.3, 9.2, 8.4, 8.6, 8.3, 8.1, 8.5, 9.3, 9.6, 8.7, 8.3, 7.9, 8.4, 9.5, 9.7, 9.2, 8.2, 7.9, 8.5, 8.6, 8.4, 8.8, 9.3, 8.9, 9.6, 9.7, 9.5, 9.8, 9.2, 8.8, 8.8, 8.8, 9.6, 9.0, 9.6, 9.5, 9.4, 9.2, 9.6, 9.1, 9.7, 9.5, 9.6
+)
+
+mean_rating <- mean(ratings)
+median_rating <- median(ratings)
+min_rating <- min(ratings)
+max_rating <- max(ratings)
+
+first_episode_rating <- ratings[1]
+last_episode_rating <- ratings[length(ratings)]
+
+difference_first_last_rating <- last_episode_rating - first_episode_rating
+difference_min_max_rating <- max_rating - min_rating
+```
+
+
+The ratings of *Breaking Bad* remained consistently high throughout the series, with noticeable improvement over time. The lowest rating recorded was `r min_rating`, while the highest reached `r max_rating`, resulting in a difference of `r round(difference_min_max_rating, 2)`. The first episode had a rating of `r first_episode_rating`, while the final episode reached `r last_episode_rating`, representing an increase of `r round(difference_first_last_rating, 2)`. The average rating across all episodes is approximately `r round(mean_rating, 2)`, with a median of `r median_rating`. Overall, the data shows that the series maintained strong ratings and improved towards its conclusion.
