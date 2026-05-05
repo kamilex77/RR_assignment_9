@@ -1,6 +1,6 @@
 ---
-title: "Breaking Bad Viewership Analysis"
-author: "Kamil Laskowski"
+title: "Breaking Bad Viewership & Rating Analysis"
+author: "Kamil Laskowski 441202"
 date: "`r Sys.Date()`"
 output:
   html_document: default
@@ -19,7 +19,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Image
 
-![](Breaking_Bad_logo.png)
+![](images/Breaking_Bad_logo.png)
 
 ## Summary statistics about viewers
 
@@ -51,7 +51,7 @@ abline(lm(viewers ~ seq_along(viewers)), col="red", lwd=2)
 grid()
 ```
 
-## Episode-to-Episode viewers changes
+## Episode-to-episode viewers changes
 
 ```{r, echo = FALSE}
 changes <- diff(viewers)
