@@ -13,7 +13,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Description
 
-*Breaking Bad* is an American television drama series created by Vince Gilligan for the cable network AMC. The series follows *Walter White* (Bryan Cranston), a 50-year-old high school chemistry teacher in Albuquerque, New Mexico. After White is diagnosed with terminal lung cancer, he uses his chemistry expertise to cook crystal meth, assisted by his former student *Jesse Pinkman* (Aaron Paul), to secure his family's (played by Anna Gunn and RJ Mitte) inheritance before he dies.
+*Breaking Bad* is an American television drama series created by *Vince Gilligan* for the cable network AMC. The series follows *Walter White* (*Bryan Cranston*), a 50-year-old high school chemistry teacher in Albuquerque, New Mexico. After White is diagnosed with terminal lung cancer, he uses his chemistry expertise to cook crystal meth, assisted by his former student *Jesse Pinkman* (*Aaron Paul*), to secure his family's (played by *Anna Gunn* and *RJ Mitte*) inheritance before he dies.
+
+*source: Wikipedia*
 
 ## Image
 
@@ -22,7 +24,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Summary statistics about viewers
 
 ```{r}
-#AI assisted viewers data extraction from https://en.wikipedia.org/wiki/List_of_Suits_episodes
+#AI assisted viewers data extraction from https://en.wikipedia.org/wiki/List_of_Breaking_Bad_episodes
 viewers <- c(
   1.41, 1.49, 1.08, 1.09, 0.97, 1.07, 1.50, 1.66, 1.60, 1.13, 1.29, 1.21, 1.41, 1.20, 1.04, 1.27, 1.19, 1.29, 1.19, 1.50, 1.95, 1.55, 1.33, 1.46, 1.61, 1.64, 1.52, 1.78, 1.61, 1.20, 1.32, 1.19, 1.56, 2.58, 1.97, 1.71, 1.83, 1.75, 1.67, 1.91, 1.98, 1.89, 1.80, 1.55, 1.73, 1.90, 2.93, 2.29, 2.20, 2.29, 2.48, 2.81, 2.98, 2.78, 5.92, 4.77, 4.85, 4.41, 5.11, 6.37, 6.58, 10.28
 )
@@ -39,31 +41,60 @@ The average viewership across all episodes is approximately 2.24 million viewers
 
 ## Viewership over time
 
-```{r}
-plot(viewers, type="l",
+```{r, echo = FALSE}
+plot(viewers, type="o", pch=16, lwd=2, col="steelblue",
      xlab="Episode (chronological order)",
-     ylab="Viewership (millions)",
-     main="Breaking Bad Viewership per Episode")
+     ylab="Viewership (millions)")
+
+abline(lm(viewers ~ seq_along(viewers)), col="red", lwd=2)
+
+grid()
 ```
 
 ## Episode-to-Episode viewers changes
 
-```{r}
+```{r, echo = FALSE}
 changes <- diff(viewers)
 
-plot(changes, type="l",
-     xlab="Episode",
-     ylab="Change in Viewership",
-     main="Episode-to-Episode Changes in Viewership")
+df <- data.frame(
+  Episode = 2:length(viewers),
+  Change = changes,
+  Increase = changes > 0
+)
+library(ggplot2)
+
+#AI assisted plot generation (only the increase true/false part)
+ggplot(df, aes(x = Episode, y = Change, fill = Increase)) +
+  geom_col(width = 0.8) +
+  scale_fill_manual(
+    values = c("TRUE" = "darkgreen", "FALSE" = "red"),
+    labels = c("FALSE" = "FALSE", "TRUE" = "TRUE")
+  ) +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  labs(
+    x = "Episode (chronological order)",
+    y = "Change in Viewership (millions)",
+    fill = "Increase"
+  ) +
+  theme_minimal()
 ```
 
 ## Description of the observed changes on ratings
 
-```{r}
+```{r, echo=FALSE}
 #AI assisted rating data extraction from https://www.imdb.com/title/tt0903747/ratings/
 ratings <- c(
   9.0, 8.6, 8.7, 8.2, 8.2, 9.3, 8.8, 8.6, 9.3, 8.3, 8.2, 8.2, 8.8, 8.6, 9.2, 9.2, 8.4, 8.9, 9.3, 9.2, 8.4, 8.6, 8.3, 8.1, 8.5, 9.3, 9.6, 8.7, 8.3, 7.9, 8.4, 9.5, 9.7, 9.2, 8.2, 7.9, 8.5, 8.6, 8.4, 8.8, 9.3, 8.9, 9.6, 9.7, 9.5, 9.8, 9.2, 8.8, 8.8, 8.8, 9.6, 9.0, 9.6, 9.5, 9.4, 9.2, 9.6, 9.1, 9.7, 9.5, 9.6
 )
+
+#AI assisted table creation
+episodes <- 1:length(ratings)
+df_ratings <- data.frame(
+  Episode_Number_Overall = episodes,
+  Rating = round(ratings, 1)
+)
+
+knitr::kable(df_ratings, caption = "Breaking Bad Episode Ratings (IMDb)")
 
 mean_rating <- mean(ratings)
 median_rating <- median(ratings)
@@ -78,4 +109,4 @@ difference_min_max_rating <- max_rating - min_rating
 ```
 
 
-The ratings of *Breaking Bad* remained consistently high throughout the series, with noticeable improvement over time. The lowest rating recorded was `r min_rating`, while the highest reached `r max_rating`, resulting in a difference of `r round(difference_min_max_rating, 2)`. The first episode had a rating of `r first_episode_rating`, while the final episode reached `r last_episode_rating`, representing an increase of `r round(difference_first_last_rating, 2)`. The average rating across all episodes is approximately `r round(mean_rating, 2)`, with a median of `r median_rating`. Overall, the data shows that the series maintained strong ratings and improved towards its conclusion.
+The ratings of *Breaking Bad* remained consistently high throughout the series, with noticeable improvement over time. The lowest rating recorded was **`r min_rating`**, while the highest reached **`r max_rating`**, resulting in a difference of **`r round(difference_min_max_rating, 2)`**. The first episode had a rating of **`r first_episode_rating`**, while the final episode reached **`r last_episode_rating`**, representing an increase of **`r round(difference_first_last_rating, 2)`**. The average rating across all episodes is approximately **`r round(mean_rating, 2)`**, with a median of **`r median_rating`**. Overall, the data shows that the series maintained strong ratings and improved towards its conclusion.
